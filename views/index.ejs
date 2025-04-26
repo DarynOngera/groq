@@ -1,23 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Groq CLI UI</title>
+  <title>TutorMtaani</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <div class="container">
     <h1>TutorMtaani</h1>
-    <div class="chat-box" id="chat">
-      <% if (typeof reply !== 'undefined') { %>
-    <div class="message user"><strong>You:</strong> <%= prompt %></div>
-    <div class="message bot"><strong>Groq:</strong> <%= reply %></div>
-  <% } %>
-      <!-- Current conversation will be appended here (optional via JS) -->
-    </div>
+
     <form method="POST" action="/">
-      <input type="text" name="prompt" placeholder="Type your message..." required autocomplete="off" />
-      <button type="submit">Send</button>
+      <label>Skill Level:</label>
+      <input type="text" name="skillLevel" placeholder="Beginner, Intermediate, etc." required><br>
+
+      <label>Learning Goal:</label>
+      <input type="text" name="learningGoal" placeholder="e.g. Build a web app" required><br>
+
+      <label>Preferred Learning Method:</label>
+      <input type="text" name="learningMethod" placeholder="Videos, Reading, etc." required><br>
+
+      <label>Topics (comma-separated):</label>
+      <input type="text" name="topics" placeholder="e.g. JavaScript, Node.js" required><br>
+
+      <button type="submit">Get Recommendations</button>
     </form>
+
+    <% if (typeof reply !== 'undefined') { %>
+      <div class="chat-box" id="chat">
+        <div class="message user">
+          <strong>You:</strong> <%= userPrompt %>
+        </div>
+        <div class="message bot">
+          <strong>Groq:</strong> <pre><%= reply %></pre>
+        </div>
+      </div>
+    <% } %>
   </div>
 </body>
 </html>

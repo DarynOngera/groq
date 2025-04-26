@@ -1,5 +1,4 @@
 import express from "express";
-import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import pkg from "twilio";
 const { twiml } = pkg;
@@ -24,6 +23,22 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
+// Utility to build structured prompt
+function createStructuredPrompt({ skillLevel, learningGoal, learningMethod, topics }) {
+  return `You are a personalized AI tutor for a ${skillLevel} learner.
+The user wants to learn about ${learningGoal}, especially these topics: ${topics.join(", ")}.
+They prefer learning through ${learningMethod}.
+
+Please suggest a curated list of up to 5 learning resources. For each, include:
+- Title
+- Resource Type (Video, Course, Article, etc.)
+- Platform (e.g., YouTube, Coursera)
+- A 1-line description
+- A direct link (if possible)
+
+Respond in clear bullet points.`;
+}
+
 // WhatsApp webhook route
 app.post("/webhook", async (req, res) => {
   const incomingMsg = req.body.Body;
@@ -46,23 +61,29 @@ app.post("/webhook", async (req, res) => {
   }
 });
 
-// Optional: UI test page (CLI interface in browser)
+// UI test page (GET)
 app.get("/", (req, res) => {
-  res.render("index", { response: null });
+  res.render("index", { reply: null, userPrompt: null });
 });
 
+// UI POST route with CLI-like structure
 app.post("/", async (req, res) => {
-  
-  
+  const { skillLevel, learningGoal, learningMethod, topics } = req.body;
+  const topicsArray = topics.split(",").map(t => t.trim());
+
+  const userPrompt = createStructuredPrompt({
+    skillLevel,
+    learningGoal,
+    learningMethod,
+    topics: topicsArray
+  });
+
   try {
-    const prompt = req.body.prompt;
-    const groqResponse = await getGroqChatCompletion(prompt);
+    const groqResponse = await getGroqChatCompletion(userPrompt);
     const reply = groqResponse.choices[0]?.message?.content || "No response.";
-    
-    res.render("index", { response: reply });
-    
+    res.render("index", { reply, userPrompt });
   } catch (error) {
-    res.render("index", { response: "Error: " + error.message });
+    res.render("index", { reply: "Error: " + error.message, userPrompt });
   }
 });
 
