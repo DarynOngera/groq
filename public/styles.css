@@ -85,3 +85,10 @@ button:hover, button:focus {
   background: linear-gradient(90deg, #61dafb 0%, #00ff88 100%);
   color: #1a1a1a;
 }
+
+.reminder-confirmation {
+  color: #228B22;
+  font-style: italic;
+  margin-top: 10px;
+}
+
