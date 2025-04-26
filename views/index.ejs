@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Groq CLI UI</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>TutorMtaani</h1>
+    <div class="chat-box" id="chat">
+      <% if (typeof reply !== 'undefined') { %>
+    <div class="message user"><strong>You:</strong> <%= prompt %></div>
+    <div class="message bot"><strong>Groq:</strong> <%= reply %></div>
+  <% } %>
+      <!-- Current conversation will be appended here (optional via JS) -->
+    </div>
+    <form method="POST" action="/">
+      <input type="text" name="prompt" placeholder="Type your message..." required autocomplete="off" />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</body>
+</html>

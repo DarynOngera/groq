@@ -1,0 +1,48 @@
+body {
+  font-family: monospace;
+  background: #111;
+  color: #eee;
+  padding: 2rem;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+}
+
+.chat-box {
+  border: 1px solid #444;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  height: 400px;
+  overflow-y: scroll;
+  background: #1a1a1a;
+}
+
+.message {
+  margin-bottom: 1rem;
+}
+
+.user {
+  color: #00ff88;
+}
+
+.bot {
+  color: #61dafb;
+}
+
+input[type="text"] {
+  width: 70%;
+  padding: 0.5rem;
+  background: #222;
+  color: #fff;
+  border: 1px solid #333;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  background: #00ff88;
+  border: none;
+  color: #111;
+  cursor: pointer;
+}
