@@ -39,28 +39,6 @@ LocalStorage / Firebase (ReminderAgent)
 ngrok (for tunneling localhost to public URL)
 
 
-
----
-
-Project Structure
-
-project-root/
-│
-├── index.js                # Main server and routing
-├── groq3.js                # Groq LLaMA 3 chat integration
-├── reminderAgent.js        # Reminder scheduler logic
-│
-├── views/
-│   └── index.ejs           # Simple CLI-style web interface
-│
-├── public/
-│   └── styles.css          # Optional UI styling
-│
-├── .env                    # API Keys (Groq, Twilio)
-├── storage.json            # (If using local JSON for reminders)
-├── README.md               # This file
-
-
 ---
 
 Setup
@@ -69,7 +47,7 @@ Setup
 
 
 
-git clone https://github.com/your-username/tutormtaani.git
+git clone https://github.com/DarynOngera/tutormtaani.git
 cd tutormtaani
 
 2. Install dependencies:
